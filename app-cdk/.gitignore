@@ -1,11 +1,8 @@
-
-*.swp
-package-lock.json
-node_modules/
-npm-debug.log*
-cdk.context.json
+*.js
+!jest.config.js
+*.d.ts
+node_modules
 
 # CDK asset staging directory
 .cdk.staging
 cdk.out
-
