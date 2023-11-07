@@ -1,9 +1,9 @@
-import { Duration, Stack, StackProps } from "aws-cdk-lib";
-import * as ec2 from "aws-cdk-lib/aws-ec2";
+import { Stack, StackProps, Duration } from "aws-cdk-lib";
+import { Construct } from "constructs";
 import * as ecr from "aws-cdk-lib/aws-ecr";
+import * as ec2 from "aws-cdk-lib/aws-ec2";
 import * as ecs from "aws-cdk-lib/aws-ecs";
 import * as ecsPatterns from "aws-cdk-lib/aws-ecs-patterns";
-import { Construct } from "constructs";
 
 interface ConsumerProps extends StackProps {
   ecrRepository: ecr.Repository;
@@ -32,7 +32,7 @@ export class AppCdkStack extends Stack {
         desiredCount: 1,
         taskImageOptions: {
           image: ecs.ContainerImage.fromEcrRepository(props.ecrRepository),
-          containerName: "my-app",
+          containerName: 'my-app',
           containerPort: 3000,
         },
       }
@@ -42,12 +42,9 @@ export class AppCdkStack extends Stack {
       healthyThresholdCount: 2,
       unhealthyThresholdCount: 2,
       timeout: Duration.seconds(10),
-      interval: Duration.seconds(11),
+      interval:Duration.seconds(11)
     });
-
-    this.fargateService.targetGroup.setAttribute(
-      "deregistration_delay.timeout_seconds",
-      "5"
-    );
+    
+    this.fargateService.targetGroup.setAttribute('deregistration_delay.timeout_seconds', '5');
   }
 }
